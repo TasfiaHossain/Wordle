@@ -23,3 +23,28 @@ body{
     grid-template-columns: repeat(5,auto);
     grid-template-rows: repeat(6,auto);
 }
+
+.box{
+    width: 60px;
+    height: 60px;
+    border: 1px solid var(--empty);
+    margin: 4px;
+    color: white;
+    text-transform: uppercase;
+    display: grid;
+    place-items: center;
+    font-family: Arial, Helvetica, sans-serif ;
+    font-size: 2.4erm;
+}
+
+.box.empty{
+    background: var(--empty);
+}
+
+.box.right{
+    background: var(--right);
+}
+
+.box.wrong{
+    background: var(--wrong);
+}
