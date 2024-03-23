@@ -1,5 +1,10 @@
 
+const dictionary = ['house', 'water', 'earth', 'plane', 'pluto'];
+
 const state = {
+    
+    secret:dictionary[Math.floor(Math.random() * dictionary.length)],
+    
     grid: Array(6)
         .fill()
         .map(() => Array(5).fill('')),
