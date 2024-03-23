@@ -51,7 +51,7 @@ function registerKeyboardEvent() {
         document.body.onkeydown = (e) => {
             const key = e.key;
             if (key === 'Enter') {
-                if (state.currentColor === 5) {
+                if (state.currentCol === 5) {
                     const word = getCurrentWord();
                     if (isWordValid(word)) {
                         revealWord(word);
@@ -73,6 +73,7 @@ function registerKeyboardEvent() {
 
             updateGrid();
         };
+        
     } catch (error) {
         console.error("An error occurred in registerKeyboardEvent:", error);
     }
