@@ -149,6 +149,7 @@ function startup(){
         // updateGrid();
 
         registerKeyboardEvent();
+        console.log(state.secret);
 }
 
 startup();
