@@ -41,6 +41,23 @@ function drawGrid(container){
     container.appendChild(grid);
 }
 
+function registerKeyboardEvent(){
+    document.body.onkeydown = (e) => {
+        const key = e.key;
+        if (key === 'Enter'){
+
+        }
+       
+        if (key === 'Backspace'){
+
+        }
+
+        if(isLetter(key)){
+
+        }
+    };
+}
+
 function startup(){
 
         const game = document.getElementById('game');
