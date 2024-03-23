@@ -45,16 +45,29 @@ function registerKeyboardEvent(){
     document.body.onkeydown = (e) => {
         const key = e.key;
         if (key === 'Enter'){
+            if(state.currentColor === 5){
+                const word = getCurrentWord();
+                if(isWordValid(word)){
+                    revealWord(word);
+                    state.currentRow++;
+                    state.currentCol = 0;
+                }
 
+                else {
+                    alert("Invalid Word");
+                }
+            }
         }
        
         if (key === 'Backspace'){
-
+            removeLetter();
         }
 
         if(isLetter(key)){
-
+            addLetter(key);
         }
+
+        updateGrid();
     };
 }
 
@@ -63,11 +76,13 @@ function startup(){
         const game = document.getElementById('game');
         drawGrid(game);
 
-        state.grid = Array(6)
-            .fill()
-            .map(() => Array(5).fill('A'));
+        // state.grid = Array(6)
+        //     .fill()
+        //     .map(() => Array(5).fill('A'));
         
-        updateGrid();
+        // updateGrid();
+
+        registerKeyboardEvent();
 }
 
 startup();
