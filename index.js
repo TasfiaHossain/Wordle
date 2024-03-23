@@ -13,6 +13,7 @@ function updateGrid(){
         for(let j=0; j<state.grid[i].length; j++){
             const box = document.getElementById(`box${i}${j}`);
             box.textContent = state.grid[i][j];
+        }
     }
 }
 
@@ -44,6 +45,12 @@ function startup(){
 
         const game = document.getElementById('game');
         drawGrid(game);
+
+        state.grid = Array(6)
+            .fill()
+            .map(() => Array(5).fill('A'));
+        
+        updateGrid();
 }
 
 startup();
