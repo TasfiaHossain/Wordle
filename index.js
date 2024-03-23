@@ -73,7 +73,7 @@ function registerKeyboardEvent() {
 
             updateGrid();
         };
-        
+
     } catch (error) {
         console.error("An error occurred in registerKeyboardEvent:", error);
     }
@@ -128,14 +128,14 @@ function isLetter(key){
 }
 
 function addLetter(letter) {
-    if(state.currentColumn === 5) 
+    if(state.currentCol === 5) 
         return;
     state.grid[state.currentRow][state.currentCol] = letter;
     state.currentCol++;
 }
 
 function removeLetter() {
-    if(state.currentColumn === 0) 
+    if(state.currentCol === 0) 
         return;
     state.grid[state.currentRow][state.currentCol - 1] = '';
     state.currentCol--;
