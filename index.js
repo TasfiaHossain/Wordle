@@ -77,9 +77,43 @@ function registerKeyboardEvent(){
 }
 
 function getCurrentWord() {
-
     return state.grid[state.currentRow].reduce((prev,curr) => prev + curr);
+}
 
+function isWordValid(word){
+    return dictionary.includes(word);
+}
+
+function revealWord(guess){
+    const row = state.currentRow;
+
+    for(let i = 0; i<5; i++){
+        const box = document.getElementById(`box${row}${i}`);
+        const letter = box.textContent;
+
+        if(letter === state.secret[i]) {
+            box.classList.add('CORRECT');
+        }
+
+        else if(state.secret.includes(letter)) {
+            box.classList.remove('WRONG');
+        }
+
+        else {
+            box.classList.add('EMPTY');
+        }
+    }
+
+    const isWinner = state.secret === guess;
+    const isGameOver = state.currentRow === 5;
+
+    if(isWinner) {
+        alert('Congratulations');
+    }
+
+    else if(isGameOver) {
+        alert(`Game Over. The correct word is ${state.secret}.`);
+    }
 }
 
 function startup(){
