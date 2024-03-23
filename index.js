@@ -130,16 +130,23 @@ function addLetter(letter) {
     state.currentCol++;
 }
 
+function removeLetter() {
+    if(state.currentColumn === 0) 
+        return;
+    state.grid[state.currentRow][state.currentCol - 1] = '';
+    state.currentCol--;
+}
+
 function startup(){
 
         const game = document.getElementById('game');
         drawGrid(game);
 
-        state.grid = Array(6)
-            .fill()
-            .map(() => Array(5).fill('A'));
+        // state.grid = Array(6)
+        //     .fill()
+        //     .map(() => Array(5).fill('A'));
         
-        updateGrid();
+        // updateGrid();
 
         registerKeyboardEvent();
 }
