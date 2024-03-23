@@ -46,35 +46,38 @@ function drawGrid(container){
     container.appendChild(grid);
 }
 
-function registerKeyboardEvent(){
-    document.body.onkeydown = (e) => {
-        const key = e.key;
-        if (key === 'Enter'){
-            if(state.currentColor === 5){
-                const word = getCurrentWord();
-                if(isWordValid(word)){
-                    revealWord(word);
-                    state.currentRow++;
-                    state.currentCol = 0;
-                }
-
-                else {
-                    alert("Invalid Word");
+function registerKeyboardEvent() {
+    try {
+        document.body.onkeydown = (e) => {
+            const key = e.key;
+            if (key === 'Enter') {
+                if (state.currentColor === 5) {
+                    const word = getCurrentWord();
+                    if (isWordValid(word)) {
+                        revealWord(word);
+                        state.currentRow++;
+                        state.currentCol = 0;
+                    } else {
+                        alert("Invalid Word");
+                    }
                 }
             }
-        }
-       
-        if (key === 'Backspace'){
-            removeLetter();
-        }
 
-        if(isLetter(key)){
-            addLetter(key);
-        }
+            if (key === 'Backspace') {
+                removeLetter();
+            }
 
-        updateGrid();
-    };
+            if (isLetter(key)) {
+                addLetter(key);
+            }
+
+            updateGrid();
+        };
+    } catch (error) {
+        console.error("An error occurred in registerKeyboardEvent:", error);
+    }
 }
+
 
 function getCurrentWord() {
     return state.grid[state.currentRow].reduce((prev,curr) => prev + curr);
@@ -149,7 +152,8 @@ function startup(){
         // updateGrid();
 
         registerKeyboardEvent();
-        console.log(state.secret);
 }
 
 startup();
+console.log(state.secret);
+
