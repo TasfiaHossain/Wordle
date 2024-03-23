@@ -71,6 +71,12 @@ function registerKeyboardEvent(){
     };
 }
 
+function getCurrentWord() {
+
+    return state.grid[state.currentRow].reduce((prev,curr) => prev + curr);
+
+}
+
 function startup(){
 
         const game = document.getElementById('game');
