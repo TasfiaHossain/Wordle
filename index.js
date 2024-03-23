@@ -118,6 +118,13 @@ function revealWord(guess){
 
 function isLetter(key){
     return key.length === 1 && key.match(/[a-z]/i);
+
+    // /i case sensitive
+    // [a-z] represents all the letters available
+}
+
+function addLetter(letter) {
+
 }
 
 function startup(){
