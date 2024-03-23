@@ -124,7 +124,10 @@ function isLetter(key){
 }
 
 function addLetter(letter) {
-
+    if(state.currentColumn === 5) 
+        return;
+    state.grid[state.currentRow][state.currentCol] = letter;
+    state.currentCol++;
 }
 
 function startup(){
