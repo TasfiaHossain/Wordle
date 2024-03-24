@@ -47,7 +47,6 @@ function drawGrid(container){
 }
 
 function registerKeyboardEvent() {
-    try {
         document.body.onkeydown = (e) => {
             const key = e.key;
             if (key === 'Enter') {
@@ -58,7 +57,7 @@ function registerKeyboardEvent() {
                         state.currentRow++;
                         state.currentCol = 0;
                     } else {
-                        alert("Invalid Word");
+                        alert('Invalid Word');
                     }
                 }
             }
@@ -73,10 +72,6 @@ function registerKeyboardEvent() {
 
             updateGrid();
         };
-
-    } catch (error) {
-        console.error("An error occurred in registerKeyboardEvent:", error);
-    }
 }
 
 
@@ -90,6 +85,7 @@ function isWordValid(word){
 
 function revealWord(guess){
     const row = state.currentRow;
+    const animation_duration = 500;
 
     for(let i = 0; i<5; i++){
         const box = document.getElementById(`box${row}${i}`);
@@ -106,6 +102,9 @@ function revealWord(guess){
         else {
             box.classList.add('EMPTY');
         }
+
+        box.classList.add('animated');
+        box.style.animationDelay = `${(i*animation_duration) / 2}`
     }
 
     const isWinner = state.secret === guess;
