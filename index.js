@@ -26,7 +26,6 @@ function updateGrid(){
     }
 }
 
-
 function drawBox(container, row, col, letter = ''){
     const box = document.createElement('div');
     box.className = 'box';
@@ -105,29 +104,23 @@ function revealWord(guess){
         const letterPosition = getPositionOfOccurrence(guess, letter, i);
     
         setTimeout(() => {
-          
-         if (numOfOccurrencesGuess > numOfOccurrencesSecret &&
-            letterPosition > numOfOccurrencesSecret) 
             
-        {
-            box.classList.add('empty');
-          
-        } else {
-            
-            if(letter === state.secret[i]) {
-                box.classList.add('CORRECT');
+            if (
+              numOfOccurrencesGuess > numOfOccurrencesSecret &&
+              letterPosition > numOfOccurrencesSecret
+            ) {
+              box.classList.add('empty');
+            } else {
+              if (letter === state.secret[i]) {
+                box.classList.add('right');
+              } else if (state.secret.includes(letter)) {
+                box.classList.add('wrong');
+              } else {
+                box.classList.add('empty');
+              }
             }
-    
-            else if(state.secret.includes(letter)) {
-                box.classList.remove('WRONG');
-            }
-    
-            else {
-                box.classList.add('EMPTY');
-            }
-        }
-        
-    }, ((i + 1) * animation_duration) / 2);
+          }, ((i + 1) * animation_duration) / 2);
+
     
         box.classList.add('animated');
         box.style.animationDelay = `${(i * animation_duration) / 2}ms`;
