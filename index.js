@@ -198,6 +198,7 @@ function startup(){
 }
 
 startup();
+console.log(state.secret);
 
 
 
