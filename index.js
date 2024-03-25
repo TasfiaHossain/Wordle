@@ -1,5 +1,10 @@
 
-const dictionary = ['house', 'water', 'earth', 'plane', 'pluto'];
+import { testDictionary, realDictionary } from './dictionary.js';
+
+// for testing purposes, make sure to use the test dictionary
+console.log('test dictionary:', testDictionary);
+
+const dictionary = realDictionary;
 
 const state = {
     
@@ -87,36 +92,54 @@ function revealWord(guess){
     const row = state.currentRow;
     const animation_duration = 500;
 
-    for(let i = 0; i<5; i++){
+    for (let i = 0; i < 5; i++) {
+       
         const box = document.getElementById(`box${row}${i}`);
+        
         const letter = box.textContent;
-
-        if(letter === state.secret[i]) {
-            box.classList.add('CORRECT');
-        }
-
-        else if(state.secret.includes(letter)) {
-            box.classList.remove('WRONG');
-        }
-
-        else {
-            box.classList.add('EMPTY');
-        }
-
+        
+        const numOfOccurrencesSecret = getNumOfOccurrencesInWord(
+          state.secret,
+          letter
+        );
+        
+        const numOfOccurrencesGuess = getNumOfOccurrencesInWord(guess, letter);
+        const letterPosition = getPositionOfOccurrence(guess, letter, i);
+    
+        setTimeout(() => {
+          if (
+            numOfOccurrencesGuess > numOfOccurrencesSecret &&
+            letterPosition > numOfOccurrencesSecret
+          ) {
+            box.classList.add('empty');
+          } else {
+            if (letter === state.secret[i]) {
+              box.classList.add('right');
+            } else if (state.secret.includes(letter)) {
+              box.classList.add('wrong');
+            } else {
+              box.classList.add('empty');
+            }
+          }
+        }, ((i + 1) * animation_duration) / 2);
+    
         box.classList.add('animated');
-        box.style.animationDelay = `${(i*animation_duration) / 2}`
+        box.style.animationDelay = `${(i * animation_duration) / 2}ms`;
     }
 
     const isWinner = state.secret === guess;
     const isGameOver = state.currentRow === 5;
 
-    if(isWinner) {
-        alert('Congratulations');
-    }
-
-    else if(isGameOver) {
-        alert(`Game Over. The correct word is ${state.secret}.`);
-    }
+    setTimeout(() => {
+        if (isWinner) {
+          alert('Congratulations!');
+        } 
+        
+        else if (isGameOver) {
+          alert(`Better luck next time! The word was ${state.secret}.`);
+        }
+      
+    }, 3 * animation_duration);
 }
 
 function isLetter(key){
@@ -155,5 +178,4 @@ function startup(){
 }
 
 startup();
-console.log(state.secret);
 
